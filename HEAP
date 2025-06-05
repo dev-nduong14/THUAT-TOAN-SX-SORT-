@@ -1,0 +1,44 @@
+#include <stdio.h>
+#include <math.h>
+ void hv(int *a,int *b){
+ 	int k = *a;
+ 	*a = *b;
+ 	*b = k;
+ }
+void headtify(int a[],int n,int i){
+	int k = i;
+	int l = 2*i +1;
+	int r = 2*i+2;
+	if(l < n && a[l] > a[k]){
+		k = l;
+	}
+	 if( r < n && a[r] > a[k]){
+	 	k = r;
+	 }
+	 if(k!=i){
+	 	hv(&a[i],&a[k]);
+	 	headtify(a,n,k);
+	 }
+	
+}
+void sort(int a[],int n){
+	for(int i = n/2 -1; i>=0;i--){
+		headtify(a,n,i);
+	}
+	for(int i = n-1 ; i>=0;i--){
+		hv(&a[0],&a[i]);
+		headtify(a,i,0);
+	}
+}
+int main(){
+	int n;
+	int a[100];
+	scanf("%d",&n);
+	for(int i = 0 ; i< n;i++){
+		scanf("%d",&a[i]);
+	}
+	sort(a,n);
+	for(int i = 0 ; i< n;i++){
+		printf("%d ",a[i]);
+	}
+}
